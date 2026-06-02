@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicado Oficial</title>
 
-    <!-- ==================== 1. Meta Pixel 基础代码 ==================== -->
+    <!-- Meta Pixel 基础代码 -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -21,152 +21,53 @@
     </script>
 
     <script>
-        // ==================== 2. 三重交叉高兼容斗篷引擎（零误杀） ====================
-        document.addEventListener("DOMContentLoaded", function() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // 验证1：手机浏览器及 Facebook 内置浏览器核心指纹
-            var isUAMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|FBAN|FBAV/i.test(ua);
-            // 验证2：屏幕宽度（完美适配拉美各类低端手机屏幕）
-            var isSmallScreen = window.innerWidth <= 768;
-            // 验证3：设备硬件触控支持检测（直接卡死电脑端和绝大部分机房模拟器爬虫）
-            var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-            // 核心判定逻辑：只要满足手机UA，或者同时满足“小屏幕+可触控”，100%放行真人进B面
-            if (isUAMobile || (isSmallScreen && isTouchDevice)) {
-                // 【B面-真人手机】：0.4秒丝滑淡出骨架屏，展示玻利维亚真内容
-                setTimeout(function(){
-                    document.getElementById("skeleton").style.display = "none";
-                    document.getElementById("realPage").style.display = "block";
-                }, 400);
-            } else {
-                // 【A面-合规白页】：电脑、Meta 审核爬虫、机审人员直接锁死在这里，无任何敏感词
-                document.getElementById("skeleton").style.display = "none";
-                document.getElementById("safePage").style.display = "block";
-            }
-        });
-
-        // ==================== 3. 跳转跟踪逻辑（300ms 延迟，专治拉美漏计） ====================
         function trackAndGo() {
-            // 强制触发 Meta 广告后台已对接的 Lead_WS 高价值事件
+            // 实战高回传写法：先触发事件
             fbq('trackCustom', 'Lead_WS');
             
-            // 延迟 300 毫秒跳转，确保拉美移动网络下数据包安全发给 Meta 服务器，防漏计死结
+            // 实战黄金控速：延迟 200 毫秒跳转。既不影响拉美真人的进粉流速，又能死死确保 Meta 记账成功
             setTimeout(function() {
                 window.location.href = "https://svip1027.top/ksdgh556"; 
-            }, 300);
+            }, 200);
         }
     </script>
 
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #f5f5f7;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            width: 90%;
-            max-width: 400px;
-            padding: 30px 20px;
-            text-align: center;
-            box-sizing: border-box;
-        }
-        .page-section { display: none; }
-        
-        /* 骨架屏占位轻量化动画 */
-        #skeleton { display: block; }
-        .sk-avatar { width: 96px; height: 96px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 20px; animation: pulse 1.2s infinite; }
-        .sk-line { height: 16px; background: #e2e8f0; border-radius: 4px; margin: 10px auto; animation: pulse 1.2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-
-        /* 头像与在线绿点 */
+        body { font-family: -apple-system, Arial, sans-serif; background-color: #f5f5f7; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 90%; max-width: 400px; padding: 30px 20px; text-align: center; box-sizing: border-box; }
         .avatar-container { margin-bottom: 16px; position: relative; display: inline-block; }
         .avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; background-color: #eee; }
         .online-badge { width: 14px; height: 14px; background-color: #00c853; border: 2px solid #ffffff; border-radius: 50%; position: absolute; bottom: 4px; right: 4px; }
-        
-        .dept-title { color: #2563eb; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+        .dept-title { color: #2563eb; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
         .main-title { color: #1d1d1f; font-size: 22px; font-weight: 700; margin: 0 0 20px 0; }
-        
         .info-box { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 20px; text-align: left; }
         .info-item { color: #334155; font-size: 14px; line-height: 1.5; margin-bottom: 8px; }
-        .info-item:last-child { margin-bottom: 0; }
-        
         .description { color: #515154; font-size: 14px; line-height: 1.5; margin: 0 0 20px 0; text-align: left; }
-        
-        /* 强引流绿色大按钮 */
-        .btn { display: block; background-color: #00c853; color: #ffffff; text-decoration: none; font-size: 17px; font-weight: 600; padding: 14px 0; border-radius: 8px; border: none; width: 100%; cursor: pointer; transition: background-color 0.2s; text-align: center; }
-        .btn:active { background-color: #00a543; }
-        
+        .btn { display: block; background-color: #00c853; color: #ffffff; text-decoration: none; font-size: 19px; font-weight: 700; padding: 15px 0; border-radius: 8px; border: none; width: 100%; cursor: pointer; text-align: center; box-shadow: 0 4px 12px rgba(0,200,83,0.3); }
         .hint-text { color: #86868b; font-size: 12px; font-style: italic; line-height: 1.4; margin: 0; background-color: #fffbeb; border: 1px dashed #fef3c7; padding: 8px; border-radius: 6px; }
     </style>
 </head>
 <body>
-
     <div class="container">
+        <div class="avatar-container">
+            <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=60&w=120&h=120" alt="Consultor">
+            <div class="online-badge"></div>
+        </div>
         
-        <!-- ⏳ 缓冲层：防开屏白跳的原生骨架屏 -->
-        <div id="skeleton">
-            <div class="sk-avatar"></div>
-            <div class="sk-line" style="width: 60%;"></div>
-            <div class="sk-line" style="width: 80%;"></div>
-            <div class="sk-line" style="width: 90%; height: 80px; border-radius: 8px;"></div>
-            <div class="sk-line" style="width: 100%; height: 45px; border-radius: 8px; margin-top: 15px;"></div>
+        <div class="dept-title">Notificación de Recursos Humanos</div>
+        <h1 class="main-title">ANUNCIO OFICIAL</h1>
+        
+        <div class="info-box">
+            <div class="info-item">• <b>Edad y Género:</b> Canal exclusivo para personas <b>mayores de 22 años</b>.</div>
+            <div class="info-item">• <b>Horario flexible:</b> En tu tiempo libre (<b>1 a 2 horas al día</b>) mediante teléfono o PC.</div>
+            <div class="info-item">• <b>Ingreso diario:</b> de <b>Bs 80 a Bs 450 BOB</b>.</div>
         </div>
-
-        <!-- ==================== 🛡️ A面：安全防封合规技术白页（电脑端/Meta爬虫可见） ==================== -->
-        <div id="safePage" class="page-section">
-            <div style="font-size: 42px; margin-bottom: 16px;">🌐</div>
-            <div class="dept-title" style="color: #64748b;">Global Support Network</div>
-            <h1 class="main-title">Official Technical Communication Portal</h1>
-            <p class="description" style="text-align: center;">
-                Welcome to the verified communication gateway. This platform coordinates international system demonstrations and corporate consultation workflows. Please follow the compliance guidelines provided by your administrator.
-            </p>
-            <div class="btn" style="background-color: #64748b; cursor: default;">System Monitored</div>
-        </div>
-
-
-        <!-- ==================== 💰 B面：纯正西语拉美兼职中转真网页（手机真人可见） ==================== -->
-        <div id="realPage" class="page-section">
-            <!-- 1. 本地化顾问头像 -->
-            <div class="avatar-container">
-                <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=60&w=120&h=120" alt="Consultor">
-                <div class="online-badge"></div>
-            </div>
-            
-            <!-- 2. 官方公告标题 -->
-            <div class="dept-title">Notificación de Recursos Humanos</div>
-            <h1 class="main-title">ANUNCIO OFICIAL</h1>
-            
-            <!-- 3. 核心利益及门槛列表（已修正纯西语） -->
-            <div class="info-box">
-                <div class="info-item">• <b>Edad y Género:</b> Canal exclusivo para personas <b>mayores de 22 años</b> (varones y mujeres).</div>
-                <div class="info-item">• <b>Horario flexible:</b> En tu tiempo libre (<b>1 a 2 horas al día</b>) mediante teléfono o PC.</div>
-                <div class="info-item">• <b>Ingreso diario:</b> de <b>Bs 80 a Bs 450 BOB</b>, pago garantizado el mismo día.</div>
-            </div>
-            
-            <!-- 4. 强引导文案 -->
-            <p class="description">
-                Si cumple con los criterios, haga clic abajo para iniciar la conversación en WhatsApp. Le enviaremos una demostración en línea 1 a 1 de forma gratuita con todos los detalles.
-            </p>
-            
-            <!-- 5. 激发点击的跳转按钮 -->
-            <button onclick="trackAndGo()" class="btn">CHATEAR AHORA</button>
-            
-            <!-- 6. 底部洗脑免责提示 -->
-            <p class="hint-text">
-                *Por favor, asegúrese de confirmar al consultor que tiene más de 22 años al iniciar la comunicación.
-            </p>
-        </div>
-
+        
+        <p class="description">Si cumple con los criterios, haga clic abajo para iniciar la conversación en WhatsApp. Le enviaremos una demostración en línea 1 a 1 de forma gratuita con todos los detalles.</p>
+        
+        <button onclick="trackAndGo()" class="btn">CHATEAR AHORA</button>
+        
+        <p class="hint-text">*Por favor, asegúrese de confirmar al consultor que tiene más de 22 años al iniciar la comunicación.</p>
     </div>
-
 </body>
 </html>
